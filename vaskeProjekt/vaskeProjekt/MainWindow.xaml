@@ -23,15 +23,16 @@
                     <Label x:Name="label2_Copy" Content="Bruger" HorizontalAlignment="Left" Margin="248,74,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="tabOpret" Header="Opret">
+            <TabItem x:Name="tabOpret" Header="Opret" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="43">
                 <Grid Background="#FFE5E5E5">
-                    <TextBox x:Name="txtVaskeri" HorizontalAlignment="Left" Height="23" Margin="295,77,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="txtOpretBruger" HorizontalAlignment="Left" Height="23" Margin="53,78,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <Label x:Name="label" Content="Navn: " HorizontalAlignment="Left" Margin="10,74,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="label1" Content="Opret Vaskeri" HorizontalAlignment="Left" Margin="295,10,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="label2" Content="Opret Bruger" HorizontalAlignment="Left" Margin="53,10,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="label3" Content="Navn: " HorizontalAlignment="Left" Margin="252,75,0,0" VerticalAlignment="Top"/>
-                    <Button x:Name="btnOpretBruger" Content="Opret Bruger" HorizontalAlignment="Left" Margin="53,144,0,0" VerticalAlignment="Top" Width="120" Click="btnOpretBruger_Click"/>
-                    <Button x:Name="btnOpretVaskeri" Content="Opret Vaskeri" HorizontalAlignment="Left" Margin="295,144,0,0" VerticalAlignment="Top" Width="120" Click="btnOpretVaskeri_Click"/>
+                    <Button x:Name="btnOpretBruger" Content="Opret Bruger" HorizontalAlignment="Left" Margin="53,133,0,0" VerticalAlignment="Top" Width="120" Click="btnOpretBruger_Click"/>
+                    <Button x:Name="btnOpretVaskeri" Content="Opret Vaskeri" HorizontalAlignment="Left" Margin="295,144,0,0" VerticalAlignment="Top" Width="120"/>
+                    <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="53,106,0,0" VerticalAlignment="Top" Width="120"/>
                 </Grid>
             </TabItem>
         </TabControl>

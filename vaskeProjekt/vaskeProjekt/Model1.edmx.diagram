@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="dca52cdaf1054da99d8ce65c21977ff3" Name="Diagram1">
+        <EntityTypeShape EntityType="VaskeProjektModel.Betaling" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="VaskeProjektModel.Bruger" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VaskeProjektModel.Maskine" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="VaskeProjektModel.Reservation" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="VaskeProjektModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VaskeProjektModel.VaskeProgram" Width="1.5" PointX="7.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="VaskeProjektModel.Vaskeri" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="VaskeProjektModel.VaskeTid" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+        <AssociationConnector Association="VaskeProjektModel.FK__Betaling__Bruger__74CE504D" ManuallyRouted="false" />
+        <AssociationConnector Association="VaskeProjektModel.FK__VaskeProg__Order__789EE131" ManuallyRouted="false" />
+        <AssociationConnector Association="VaskeProjektModel.FK__Bruger__VaskeriI__6B44E613" ManuallyRouted="false" />
+        <AssociationConnector Association="VaskeProjektModel.FK__Reservati__Bruge__70FDBF69" ManuallyRouted="false" />
+        <AssociationConnector Association="VaskeProjektModel.FK__Maskine__Vaskeri__68687968" ManuallyRouted="false" />
+        <AssociationConnector Association="VaskeProjektModel.FK__VaskeProg__Maski__77AABCF8" ManuallyRouted="false" />
+        <AssociationConnector Association="VaskeProjektModel.FK__Reservati__Vaske__71F1E3A2" ManuallyRouted="false" />
+        <AssociationConnector Association="VaskeProjektModel.FK__VaskeTid__Vasker__6E2152BE" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

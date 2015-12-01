@@ -7,19 +7,25 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vaskeProjekt
+namespace VaskeWEB
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Reservation
+    public partial class Maskine
     {
-        public int Id { get; set; }
-        public Nullable<System.DateTime> ReservationDato { get; set; }
-        public string BrugerId { get; set; }
-        public Nullable<int> VaskeTidId { get; set; }
+        public Maskine()
+        {
+            this.VaskePrograms = new HashSet<VaskeProgram>();
+        }
     
-        public virtual Bruger Bruger { get; set; }
-        public virtual VaskeTid VaskeTid { get; set; }
+        public int Id { get; set; }
+        public string Maskintype { get; set; }
+        public Nullable<int> Antal { get; set; }
+        public Nullable<bool> Defect { get; set; }
+        public Nullable<int> VaskeriId { get; set; }
+    
+        public virtual Vaskeri Vaskeri { get; set; }
+        public virtual ICollection<VaskeProgram> VaskePrograms { get; set; }
     }
 }

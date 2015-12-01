@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vaskeProjekt", "vaskeProjekt\vaskeProjekt.csproj", "{B8C73233-1C67-4871-9962-219ADDFCC496}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaskeWEB", "VaskeWEB\VaskeWEB.csproj", "{22A56A4B-4C99-4DBA-AA54-42217677A32D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaskeWEB.Tests", "VaskeWEB.Tests\VaskeWEB.Tests.csproj", "{0D9AAF27-33B4-4101-9890-DF9B73F0F470}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{B8C73233-1C67-4871-9962-219ADDFCC496}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8C73233-1C67-4871-9962-219ADDFCC496}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8C73233-1C67-4871-9962-219ADDFCC496}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22A56A4B-4C99-4DBA-AA54-42217677A32D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22A56A4B-4C99-4DBA-AA54-42217677A32D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22A56A4B-4C99-4DBA-AA54-42217677A32D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22A56A4B-4C99-4DBA-AA54-42217677A32D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D9AAF27-33B4-4101-9890-DF9B73F0F470}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D9AAF27-33B4-4101-9890-DF9B73F0F470}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D9AAF27-33B4-4101-9890-DF9B73F0F470}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D9AAF27-33B4-4101-9890-DF9B73F0F470}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

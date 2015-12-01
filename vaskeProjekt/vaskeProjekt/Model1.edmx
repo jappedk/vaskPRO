@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="VaskeProjektModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="VaskeProjektModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Betaling">
           <Key>
             <PropertyRef Name="Id" />
@@ -12,14 +12,14 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Pris" Type="int" />
           <Property Name="Fakturadato" Type="datetime" />
-          <Property Name="BrugerId" Type="int" />
+          <Property Name="BrugerId" Type="varchar" MaxLength="25" />
         </EntityType>
         <EntityType Name="Bruger">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="Navn" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Navn" Type="varchar" MaxLength="25" />
+          <Property Name="Navn" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Konto" Type="decimal" Precision="18" Scale="0" />
           <Property Name="VaskeriId" Type="int" />
         </EntityType>
@@ -39,7 +39,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ReservationDato" Type="datetime" />
-          <Property Name="BrugerId" Type="int" />
+          <Property Name="BrugerId" Type="varchar" MaxLength="25" />
           <Property Name="VaskeTidId" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -79,19 +79,19 @@
           <Property Name="VaskStarted" Type="bit" />
           <Property Name="VaskeriId" Type="int" />
         </EntityType>
-        <Association Name="FK__Betaling__Bruger__24E777C3">
+        <Association Name="FK__Betaling__Bruger__74CE504D">
           <End Role="Bruger" Type="Self.Bruger" Multiplicity="0..1" />
           <End Role="Betaling" Type="Self.Betaling" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Bruger">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="Navn" />
             </Principal>
             <Dependent Role="Betaling">
               <PropertyRef Name="BrugerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bruger__VaskeriI__1B5E0D89">
+        <Association Name="FK__Bruger__VaskeriI__6B44E613">
           <End Role="Vaskeri" Type="Self.Vaskeri" Multiplicity="0..1" />
           <End Role="Bruger" Type="Self.Bruger" Multiplicity="*" />
           <ReferentialConstraint>
@@ -103,7 +103,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Maskine__Vaskeri__178D7CA5">
+        <Association Name="FK__Maskine__Vaskeri__68687968">
           <End Role="Vaskeri" Type="Self.Vaskeri" Multiplicity="0..1" />
           <End Role="Maskine" Type="Self.Maskine" Multiplicity="*" />
           <ReferentialConstraint>
@@ -115,19 +115,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Reservati__Bruge__2116E6DF">
+        <Association Name="FK__Reservati__Bruge__70FDBF69">
           <End Role="Bruger" Type="Self.Bruger" Multiplicity="0..1" />
           <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Bruger">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="Navn" />
             </Principal>
             <Dependent Role="Reservation">
               <PropertyRef Name="BrugerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Reservati__Vaske__220B0B18">
+        <Association Name="FK__Reservati__Vaske__71F1E3A2">
           <End Role="VaskeTid" Type="Self.VaskeTid" Multiplicity="0..1" />
           <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -139,7 +139,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VaskeProg__Maski__27C3E46E">
+        <Association Name="FK__VaskeProg__Maski__77AABCF8">
           <End Role="Maskine" Type="Self.Maskine" Multiplicity="0..1" />
           <End Role="VaskeProgram" Type="Self.VaskeProgram" Multiplicity="*" />
           <ReferentialConstraint>
@@ -151,7 +151,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VaskeProg__Order__28B808A7">
+        <Association Name="FK__VaskeProg__Order__789EE131">
           <End Role="Betaling" Type="Self.Betaling" Multiplicity="0..1" />
           <End Role="VaskeProgram" Type="Self.VaskeProgram" Multiplicity="*" />
           <ReferentialConstraint>
@@ -163,7 +163,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VaskeTid__Vasker__1E3A7A34">
+        <Association Name="FK__VaskeTid__Vasker__6E2152BE">
           <End Role="Vaskeri" Type="Self.Vaskeri" Multiplicity="0..1" />
           <End Role="VaskeTid" Type="Self.VaskeTid" Multiplicity="*" />
           <ReferentialConstraint>
@@ -184,40 +184,41 @@
           <EntitySet Name="VaskeProgram" EntityType="Self.VaskeProgram" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vaskeri" EntityType="Self.Vaskeri" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VaskeTid" EntityType="Self.VaskeTid" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Betaling__Bruger__24E777C3" Association="Self.FK__Betaling__Bruger__24E777C3">
+          <AssociationSet Name="FK__Betaling__Bruger__74CE504D" Association="Self.FK__Betaling__Bruger__74CE504D">
             <End Role="Bruger" EntitySet="Bruger" />
             <End Role="Betaling" EntitySet="Betaling" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bruger__VaskeriI__1B5E0D89" Association="Self.FK__Bruger__VaskeriI__1B5E0D89">
+          <AssociationSet Name="FK__Bruger__VaskeriI__6B44E613" Association="Self.FK__Bruger__VaskeriI__6B44E613">
             <End Role="Vaskeri" EntitySet="Vaskeri" />
             <End Role="Bruger" EntitySet="Bruger" />
           </AssociationSet>
-          <AssociationSet Name="FK__Maskine__Vaskeri__178D7CA5" Association="Self.FK__Maskine__Vaskeri__178D7CA5">
+          <AssociationSet Name="FK__Maskine__Vaskeri__68687968" Association="Self.FK__Maskine__Vaskeri__68687968">
             <End Role="Vaskeri" EntitySet="Vaskeri" />
             <End Role="Maskine" EntitySet="Maskine" />
           </AssociationSet>
-          <AssociationSet Name="FK__Reservati__Bruge__2116E6DF" Association="Self.FK__Reservati__Bruge__2116E6DF">
+          <AssociationSet Name="FK__Reservati__Bruge__70FDBF69" Association="Self.FK__Reservati__Bruge__70FDBF69">
             <End Role="Bruger" EntitySet="Bruger" />
             <End Role="Reservation" EntitySet="Reservation" />
           </AssociationSet>
-          <AssociationSet Name="FK__Reservati__Vaske__220B0B18" Association="Self.FK__Reservati__Vaske__220B0B18">
+          <AssociationSet Name="FK__Reservati__Vaske__71F1E3A2" Association="Self.FK__Reservati__Vaske__71F1E3A2">
             <End Role="VaskeTid" EntitySet="VaskeTid" />
             <End Role="Reservation" EntitySet="Reservation" />
           </AssociationSet>
-          <AssociationSet Name="FK__VaskeProg__Maski__27C3E46E" Association="Self.FK__VaskeProg__Maski__27C3E46E">
+          <AssociationSet Name="FK__VaskeProg__Maski__77AABCF8" Association="Self.FK__VaskeProg__Maski__77AABCF8">
             <End Role="Maskine" EntitySet="Maskine" />
             <End Role="VaskeProgram" EntitySet="VaskeProgram" />
           </AssociationSet>
-          <AssociationSet Name="FK__VaskeProg__Order__28B808A7" Association="Self.FK__VaskeProg__Order__28B808A7">
+          <AssociationSet Name="FK__VaskeProg__Order__789EE131" Association="Self.FK__VaskeProg__Order__789EE131">
             <End Role="Betaling" EntitySet="Betaling" />
             <End Role="VaskeProgram" EntitySet="VaskeProgram" />
           </AssociationSet>
-          <AssociationSet Name="FK__VaskeTid__Vasker__1E3A7A34" Association="Self.FK__VaskeTid__Vasker__1E3A7A34">
+          <AssociationSet Name="FK__VaskeTid__Vasker__6E2152BE" Association="Self.FK__VaskeTid__Vasker__6E2152BE">
             <End Role="Vaskeri" EntitySet="Vaskeri" />
             <End Role="VaskeTid" EntitySet="VaskeTid" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="VaskeProjektModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -228,21 +229,21 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Pris" Type="Int32" />
           <Property Name="Fakturadato" Type="DateTime" Precision="3" />
-          <Property Name="BrugerId" Type="Int32" />
-          <NavigationProperty Name="Bruger" Relationship="Self.FK__Betaling__Bruger__4D2A7347" FromRole="Betaling" ToRole="Bruger" />
-          <NavigationProperty Name="VaskePrograms" Relationship="Self.FK__VaskeProg__Order__50FB042B" FromRole="Betaling" ToRole="VaskeProgram" />
+          <Property Name="BrugerId" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Bruger" Relationship="Self.FK__Betaling__Bruger__74CE504D" FromRole="Betaling" ToRole="Bruger" />
+          <NavigationProperty Name="VaskePrograms" Relationship="Self.FK__VaskeProg__Order__789EE131" FromRole="Betaling" ToRole="VaskeProgram" />
         </EntityType>
         <EntityType Name="Bruger">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="Navn" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Navn" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Navn" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Konto" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="VaskeriId" Type="Int32" />
-          <NavigationProperty Name="Betalings" Relationship="Self.FK__Betaling__Bruger__4D2A7347" FromRole="Bruger" ToRole="Betaling" />
-          <NavigationProperty Name="Vaskeri" Relationship="Self.FK__Bruger__VaskeriI__43A1090D" FromRole="Bruger" ToRole="Vaskeri" />
-          <NavigationProperty Name="Reservations" Relationship="Self.FK__Reservati__Bruge__4959E263" FromRole="Bruger" ToRole="Reservation" />
+          <NavigationProperty Name="Betalings" Relationship="Self.FK__Betaling__Bruger__74CE504D" FromRole="Bruger" ToRole="Betaling" />
+          <NavigationProperty Name="Vaskeri" Relationship="Self.FK__Bruger__VaskeriI__6B44E613" FromRole="Bruger" ToRole="Vaskeri" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK__Reservati__Bruge__70FDBF69" FromRole="Bruger" ToRole="Reservation" />
         </EntityType>
         <EntityType Name="Maskine">
           <Key>
@@ -253,8 +254,8 @@
           <Property Name="Antal" Type="Int32" />
           <Property Name="Defect" Type="Boolean" />
           <Property Name="VaskeriId" Type="Int32" />
-          <NavigationProperty Name="Vaskeri" Relationship="Self.FK__Maskine__Vaskeri__3FD07829" FromRole="Maskine" ToRole="Vaskeri" />
-          <NavigationProperty Name="VaskePrograms" Relationship="Self.FK__VaskeProg__Maski__5006DFF2" FromRole="Maskine" ToRole="VaskeProgram" />
+          <NavigationProperty Name="Vaskeri" Relationship="Self.FK__Maskine__Vaskeri__68687968" FromRole="Maskine" ToRole="Vaskeri" />
+          <NavigationProperty Name="VaskePrograms" Relationship="Self.FK__VaskeProg__Maski__77AABCF8" FromRole="Maskine" ToRole="VaskeProgram" />
         </EntityType>
         <EntityType Name="Reservation">
           <Key>
@@ -262,10 +263,10 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ReservationDato" Type="DateTime" Precision="3" />
-          <Property Name="BrugerId" Type="Int32" />
+          <Property Name="BrugerId" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="VaskeTidId" Type="Int32" />
-          <NavigationProperty Name="Bruger" Relationship="Self.FK__Reservati__Bruge__4959E263" FromRole="Reservation" ToRole="Bruger" />
-          <NavigationProperty Name="VaskeTid" Relationship="Self.FK__Reservati__Vaske__4A4E069C" FromRole="Reservation" ToRole="VaskeTid" />
+          <NavigationProperty Name="Bruger" Relationship="Self.FK__Reservati__Bruge__70FDBF69" FromRole="Reservation" ToRole="Bruger" />
+          <NavigationProperty Name="VaskeTid" Relationship="Self.FK__Reservati__Vaske__71F1E3A2" FromRole="Reservation" ToRole="VaskeTid" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -286,8 +287,8 @@
           <Property Name="Tid" Type="Int32" />
           <Property Name="MaskineId" Type="Int32" />
           <Property Name="OrderId" Type="Int32" />
-          <NavigationProperty Name="Betaling" Relationship="Self.FK__VaskeProg__Order__50FB042B" FromRole="VaskeProgram" ToRole="Betaling" />
-          <NavigationProperty Name="Maskine" Relationship="Self.FK__VaskeProg__Maski__5006DFF2" FromRole="VaskeProgram" ToRole="Maskine" />
+          <NavigationProperty Name="Betaling" Relationship="Self.FK__VaskeProg__Order__789EE131" FromRole="VaskeProgram" ToRole="Betaling" />
+          <NavigationProperty Name="Maskine" Relationship="Self.FK__VaskeProg__Maski__77AABCF8" FromRole="VaskeProgram" ToRole="Maskine" />
         </EntityType>
         <EntityType Name="Vaskeri">
           <Key>
@@ -295,9 +296,9 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Navn" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Brugers" Relationship="Self.FK__Bruger__VaskeriI__43A1090D" FromRole="Vaskeri" ToRole="Bruger" />
-          <NavigationProperty Name="Maskines" Relationship="Self.FK__Maskine__Vaskeri__3FD07829" FromRole="Vaskeri" ToRole="Maskine" />
-          <NavigationProperty Name="VaskeTids" Relationship="Self.FK__VaskeTid__Vasker__467D75B8" FromRole="Vaskeri" ToRole="VaskeTid" />
+          <NavigationProperty Name="Brugers" Relationship="Self.FK__Bruger__VaskeriI__6B44E613" FromRole="Vaskeri" ToRole="Bruger" />
+          <NavigationProperty Name="Maskines" Relationship="Self.FK__Maskine__Vaskeri__68687968" FromRole="Vaskeri" ToRole="Maskine" />
+          <NavigationProperty Name="VaskeTids" Relationship="Self.FK__VaskeTid__Vasker__6E2152BE" FromRole="Vaskeri" ToRole="VaskeTid" />
         </EntityType>
         <EntityType Name="VaskeTid">
           <Key>
@@ -308,22 +309,22 @@
           <Property Name="Sluttid" Type="DateTime" Precision="3" />
           <Property Name="VaskStarted" Type="Boolean" />
           <Property Name="VaskeriId" Type="Int32" />
-          <NavigationProperty Name="Reservations" Relationship="Self.FK__Reservati__Vaske__4A4E069C" FromRole="VaskeTid" ToRole="Reservation" />
-          <NavigationProperty Name="Vaskeri" Relationship="Self.FK__VaskeTid__Vasker__467D75B8" FromRole="VaskeTid" ToRole="Vaskeri" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK__Reservati__Vaske__71F1E3A2" FromRole="VaskeTid" ToRole="Reservation" />
+          <NavigationProperty Name="Vaskeri" Relationship="Self.FK__VaskeTid__Vasker__6E2152BE" FromRole="VaskeTid" ToRole="Vaskeri" />
         </EntityType>
-        <Association Name="FK__Betaling__Bruger__4D2A7347">
+        <Association Name="FK__Betaling__Bruger__74CE504D">
           <End Role="Bruger" Type="Self.Bruger" Multiplicity="0..1" />
           <End Role="Betaling" Type="Self.Betaling" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Bruger">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="Navn" />
             </Principal>
             <Dependent Role="Betaling">
               <PropertyRef Name="BrugerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VaskeProg__Order__50FB042B">
+        <Association Name="FK__VaskeProg__Order__789EE131">
           <End Role="Betaling" Type="Self.Betaling" Multiplicity="0..1" />
           <End Role="VaskeProgram" Type="Self.VaskeProgram" Multiplicity="*" />
           <ReferentialConstraint>
@@ -335,7 +336,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bruger__VaskeriI__43A1090D">
+        <Association Name="FK__Bruger__VaskeriI__6B44E613">
           <End Role="Vaskeri" Type="Self.Vaskeri" Multiplicity="0..1" />
           <End Role="Bruger" Type="Self.Bruger" Multiplicity="*" />
           <ReferentialConstraint>
@@ -347,19 +348,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Reservati__Bruge__4959E263">
+        <Association Name="FK__Reservati__Bruge__70FDBF69">
           <End Role="Bruger" Type="Self.Bruger" Multiplicity="0..1" />
           <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Bruger">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="Navn" />
             </Principal>
             <Dependent Role="Reservation">
               <PropertyRef Name="BrugerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Maskine__Vaskeri__3FD07829">
+        <Association Name="FK__Maskine__Vaskeri__68687968">
           <End Role="Vaskeri" Type="Self.Vaskeri" Multiplicity="0..1" />
           <End Role="Maskine" Type="Self.Maskine" Multiplicity="*" />
           <ReferentialConstraint>
@@ -371,7 +372,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VaskeProg__Maski__5006DFF2">
+        <Association Name="FK__VaskeProg__Maski__77AABCF8">
           <End Role="Maskine" Type="Self.Maskine" Multiplicity="0..1" />
           <End Role="VaskeProgram" Type="Self.VaskeProgram" Multiplicity="*" />
           <ReferentialConstraint>
@@ -383,7 +384,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Reservati__Vaske__4A4E069C">
+        <Association Name="FK__Reservati__Vaske__71F1E3A2">
           <End Role="VaskeTid" Type="Self.VaskeTid" Multiplicity="0..1" />
           <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -395,7 +396,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VaskeTid__Vasker__467D75B8">
+        <Association Name="FK__VaskeTid__Vasker__6E2152BE">
           <End Role="Vaskeri" Type="Self.Vaskeri" Multiplicity="0..1" />
           <End Role="VaskeTid" Type="Self.VaskeTid" Multiplicity="*" />
           <ReferentialConstraint>
@@ -407,7 +408,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="VaskeProjektEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="VaskeProjektEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Betalings" EntityType="Self.Betaling" />
           <EntitySet Name="Brugers" EntityType="Self.Bruger" />
           <EntitySet Name="Maskines" EntityType="Self.Maskine" />
@@ -416,35 +417,35 @@
           <EntitySet Name="VaskePrograms" EntityType="Self.VaskeProgram" />
           <EntitySet Name="Vaskeris" EntityType="Self.Vaskeri" />
           <EntitySet Name="VaskeTids" EntityType="Self.VaskeTid" />
-          <AssociationSet Name="FK__Betaling__Bruger__4D2A7347" Association="Self.FK__Betaling__Bruger__4D2A7347">
+          <AssociationSet Name="FK__Betaling__Bruger__74CE504D" Association="Self.FK__Betaling__Bruger__74CE504D">
             <End Role="Bruger" EntitySet="Brugers" />
             <End Role="Betaling" EntitySet="Betalings" />
           </AssociationSet>
-          <AssociationSet Name="FK__VaskeProg__Order__50FB042B" Association="Self.FK__VaskeProg__Order__50FB042B">
+          <AssociationSet Name="FK__VaskeProg__Order__789EE131" Association="Self.FK__VaskeProg__Order__789EE131">
             <End Role="Betaling" EntitySet="Betalings" />
             <End Role="VaskeProgram" EntitySet="VaskePrograms" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bruger__VaskeriI__43A1090D" Association="Self.FK__Bruger__VaskeriI__43A1090D">
+          <AssociationSet Name="FK__Bruger__VaskeriI__6B44E613" Association="Self.FK__Bruger__VaskeriI__6B44E613">
             <End Role="Vaskeri" EntitySet="Vaskeris" />
             <End Role="Bruger" EntitySet="Brugers" />
           </AssociationSet>
-          <AssociationSet Name="FK__Reservati__Bruge__4959E263" Association="Self.FK__Reservati__Bruge__4959E263">
+          <AssociationSet Name="FK__Reservati__Bruge__70FDBF69" Association="Self.FK__Reservati__Bruge__70FDBF69">
             <End Role="Bruger" EntitySet="Brugers" />
             <End Role="Reservation" EntitySet="Reservations" />
           </AssociationSet>
-          <AssociationSet Name="FK__Maskine__Vaskeri__3FD07829" Association="Self.FK__Maskine__Vaskeri__3FD07829">
+          <AssociationSet Name="FK__Maskine__Vaskeri__68687968" Association="Self.FK__Maskine__Vaskeri__68687968">
             <End Role="Vaskeri" EntitySet="Vaskeris" />
             <End Role="Maskine" EntitySet="Maskines" />
           </AssociationSet>
-          <AssociationSet Name="FK__VaskeProg__Maski__5006DFF2" Association="Self.FK__VaskeProg__Maski__5006DFF2">
+          <AssociationSet Name="FK__VaskeProg__Maski__77AABCF8" Association="Self.FK__VaskeProg__Maski__77AABCF8">
             <End Role="Maskine" EntitySet="Maskines" />
             <End Role="VaskeProgram" EntitySet="VaskePrograms" />
           </AssociationSet>
-          <AssociationSet Name="FK__Reservati__Vaske__4A4E069C" Association="Self.FK__Reservati__Vaske__4A4E069C">
+          <AssociationSet Name="FK__Reservati__Vaske__71F1E3A2" Association="Self.FK__Reservati__Vaske__71F1E3A2">
             <End Role="VaskeTid" EntitySet="VaskeTids" />
             <End Role="Reservation" EntitySet="Reservations" />
           </AssociationSet>
-          <AssociationSet Name="FK__VaskeTid__Vasker__467D75B8" Association="Self.FK__VaskeTid__Vasker__467D75B8">
+          <AssociationSet Name="FK__VaskeTid__Vasker__6E2152BE" Association="Self.FK__VaskeTid__Vasker__6E2152BE">
             <End Role="Vaskeri" EntitySet="Vaskeris" />
             <End Role="VaskeTid" EntitySet="VaskeTids" />
           </AssociationSet>
@@ -454,7 +455,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="VaskeProjektModelStoreContainer" CdmEntityContainer="VaskeProjektEntities1">
+        <EntityContainerMapping StorageEntityContainer="VaskeProjektModelStoreContainer" CdmEntityContainer="VaskeProjektEntities2">
           <EntitySetMapping Name="Betalings">
             <EntityTypeMapping TypeName="VaskeProjektModel.Betaling">
               <MappingFragment StoreEntitySet="Betaling">

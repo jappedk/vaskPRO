@@ -8,32 +8,26 @@ namespace vaskeProjekt
 {
     class Dao
     {
-        static VaskeProjektEntities1 DB = null;
+        static VaskeProjektEntities2 DB = null;
 
         private Dao()
         {
 
         }
 
-        public static VaskeProjektEntities1 getdB()
+        public static VaskeProjektEntities2 getdB()
         {
             if (DB == null)
             {
-                DB = new VaskeProjektEntities1();
+                DB = new VaskeProjektEntities2();
             }
             return DB;
         }
         public static Bruger CreateBruger(Bruger b)
         {
             DB.Brugers.Add(b);
-            try
-            {
-                DB.SaveChanges();
-            }
-            catch
-            {
-
-            }
+            DB.SaveChanges();
+            
             return b;
         }
         public static void CreateVaskeri(Vaskeri v)

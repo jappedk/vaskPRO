@@ -7,17 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vaskeProjekt
+namespace VaskeWEB
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class Reservation
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int Id { get; set; }
+        public Nullable<System.DateTime> ReservationDato { get; set; }
+        public string BrugerId { get; set; }
+        public Nullable<int> VaskeTidId { get; set; }
+    
+        public virtual Bruger Bruger { get; set; }
+        public virtual VaskeTid VaskeTid { get; set; }
     }
 }

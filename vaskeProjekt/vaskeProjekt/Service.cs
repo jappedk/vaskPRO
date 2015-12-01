@@ -8,7 +8,7 @@ namespace vaskeProjekt
 {
     class Service
     {
-        private static VaskeProjektEntities1 DB = Dao.getdB();
+        private static VaskeProjektEntities2 DB = Dao.getdB();
 
         public static Bruger CreateBruger(String navn)
         {
