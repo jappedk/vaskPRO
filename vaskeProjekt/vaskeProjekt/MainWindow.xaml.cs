@@ -24,5 +24,60 @@ namespace vaskeProjekt
         {
             InitializeComponent();
         }
+
+        private void btnOpretBruger_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtBrugerNavn.Text))
+            {
+                MessageBox.Show("Navn ugyldigt.");
+            }
+            else
+            {
+                Service.CreateBruger(txtBrugerNavn.Text);
+                txtBrugerNavn.Text = "";
+                //MessageBox.Show("Bruger Oprettet");
+            }
+        }
+
+        private void btnOpretVaskeri_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtVaskeri.Text))
+            {
+                MessageBox.Show("Navn ugyldigt.");
+            }
+            else
+            {
+               // Service.CreateVaskeri(txtVaskeri.Text);
+                txtVaskeri.Text = "";
+                //MessageBox.Show("Vaskeri Oprettet");
+            }
+        }
+
+        private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (tabTilknyt.IsSelected)
+            {
+                cbVaskerier.ItemsSource = Service.getVaskerier();
+                //lbBrugereUV.ItemsSource = Service.getBrugereUdenVaskeri();
+            }
+        }
+
+        private void btnTilknyt_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtBrugerNavn.Text))
+            {
+                MessageBox.Show("Navn ugyldigt.");
+            }
+            else if ((Vaskeri)cbVaskerier.SelectedValue == null)
+            {
+                MessageBox.Show("Der skal vælges et Vaskeri");
+            }
+            else
+            {
+                Bruger b = Service.CreateBruger(txtBrugerNavn.Text);
+                Service.Tilknyt(b, (Vaskeri)cbVaskerier.SelectedValue);
+                txtBrugerNavn.Text = "";
+            }
+        }
     }
 }

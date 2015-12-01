@@ -69,6 +69,7 @@
     <Compile Include="Bruger.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Dao.cs" />
     <Compile Include="Maskine.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -80,6 +81,7 @@
     <Compile Include="Reservation.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Service.cs" />
     <Compile Include="sysdiagram.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

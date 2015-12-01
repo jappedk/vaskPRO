@@ -27,5 +27,10 @@ namespace vaskeProjekt
         public virtual ICollection<Bruger> Brugers { get; set; }
         public virtual ICollection<Maskine> Maskines { get; set; }
         public virtual ICollection<VaskeTid> VaskeTids { get; set; }
+        public override string ToString()
+        {
+            return "ID: " + Id + "Navn: " + Navn;
+        }
     }
+    
 }
