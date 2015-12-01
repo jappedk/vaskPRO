@@ -16,14 +16,16 @@ namespace VaskeWEB.Controllers
         [HttpPost]
         public ActionResult Index(FormCollection fc)
         {
-            String name = fc["Username"];
+            String navn = fc["Username"];
             
-            try
+          
+                Bruger temp = Service.findBruger(navn);
+
+            if (temp != null)
             {
-                Bruger temp = Service.valiDateLogin(name);
                 return RedirectToAction("Index", "Home", temp);
             }
-            catch
+            else
             {
                 ModelState.AddModelError("LoginError", "Log in incorrect Try again");
                 return View();
